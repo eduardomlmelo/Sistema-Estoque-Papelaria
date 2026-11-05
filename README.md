@@ -133,6 +133,115 @@ O sistema segue uma arquitetura em 3 camadas:
 
 MIT
 
+## Screenshots
+
+A aplicação possui interface intuitiva com:
+- **Tabela de Produtos**: Lista todos os produtos com código, nome, quantidade, preço e categoria
+- **Busca em Tempo Real**: Filtra produtos conforme você digita
+- **Formulários**: Interface simples para adicionar e editar produtos
+- **Histórico**: Visualiza todas as movimentações de cada produto
+- **Relatórios**: Gera PDFs com listagem de estoque
+
+## Estrutura do Banco de Dados
+
+### Tabela: products
+- id (INTEGER PRIMARY KEY)
+- name (TEXT) - Nome do produto
+- code (TEXT UNIQUE) - Código único do produto
+- quantity (INTEGER) - Quantidade em estoque
+- price (REAL) - Preço unitário
+- category (TEXT) - Categoria
+- description (TEXT) - Descrição
+- created_at (TIMESTAMP) - Data de criação
+- updated_at (TIMESTAMP) - Última atualização
+
+### Tabela: stock_movements
+- id (INTEGER PRIMARY KEY)
+- product_id (INTEGER) - Referência ao produto
+- quantity_change (INTEGER) - Quantidade adicionada/removida
+- reason (TEXT) - Motivo (Entrada, Venda, Devolução, etc)
+- timestamp (TIMESTAMP) - Data/hora da movimentação
+
+## Exemplos de Uso
+
+### Adicionar Produto
+1. Clique em "Novo Produto"
+2. Preencha os campos (todos obrigatórios)
+3. Clique em "Salvar"
+4. Produto aparecerá na tabela
+
+### Buscar Produto
+1. Digite no campo de busca
+2. Tabela filtra automaticamente por nome ou código
+3. Limpe o campo para ver todos novamente
+
+### Editar Produto
+1. Selecione o produto na tabela
+2. Clique em "Editar"
+3. Modifique os dados
+4. Clique em "Salvar"
+5. Alterações são gravadas no banco
+
+### Remover Produto
+1. Selecione o produto na tabela
+2. Clique em "Remover"
+3. Confirme a exclusão
+4. Produto é deletado com todas suas movimentações
+
+### Ver Histórico
+1. Selecione um produto
+2. Clique em "Histórico"
+3. Veja todas as entradas/saídas com datas
+
+### Gerar Relatório
+1. Clique em "Relatório PDF"
+2. Escolha filtros (todos os produtos ou por categoria)
+3. Defina o caminho de destino
+4. Clique em "Gerar"
+5. PDF é criado com listagem formatada
+
+## Tratamento de Erros
+
+A aplicação valida todos os dados antes de salvar:
+- ✓ Nome obrigatório (mín. 3 caracteres)
+- ✓ Código único e obrigatório
+- ✓ Quantidade não pode ser negativa
+- ✓ Preço não pode ser negativo
+- ✓ Categoria obrigatória
+- ✓ Mensagens claras em caso de erro
+
+## Performance
+
+- **Busca**: Resultados instantâneos com índices SQLite
+- **Banco de Dados**: SQLite com índices otimizados
+- **Relatórios**: PDF gerado em segundos com reportlab
+
+## Possíveis Melhorias Futuras
+
+1. **Autenticação**: Sistema de login para múltiplos usuários
+2. **Permissões**: Controle de acesso por papel (admin, vendedor, etc)
+3. **Integração**: API REST para integrar com sistemas externos
+4. **Gráficos**: Dashboard com gráficos de estoque e vendas
+5. **Backup**: Exportar/importar banco de dados
+6. **Notificações**: Alertas automáticos para estoque baixo
+7. **Múltiplos Depósitos**: Controle de estoque em diferentes localidades
+8. **Historico Detalhado**: Usuário que fez a movimentação, observações extras
+
+## Contribuindo
+
+Para contribuir com melhorias:
+1. Crie uma branch: `git checkout -b feat/sua-feature`
+2. Faça commits descritivos: `git commit -m "feat: descrição"`
+3. Envie um pull request
+
+## Licença
+
+MIT - Veja LICENSE para detalhes
+
 ## Autor
 
 Eduardo Matos - [eduardomatoslimam@gmail.com](mailto:eduardomatoslimam@gmail.com)
+
+---
+
+**Desenvolvido em Python 3.13 com Tkinter, SQLite e ReportLab**
